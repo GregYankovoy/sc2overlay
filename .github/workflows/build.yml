@@ -17,6 +17,7 @@ jobs:
           dotnet-version: 6.0.x
       - name: Install dependencies
         run: dotnet restore
+        working-directory: src/Overlay.API
       - name: Test
         run: dotnet test --no-restore --verbosity normal
         working-directory: src/Overlay.API
