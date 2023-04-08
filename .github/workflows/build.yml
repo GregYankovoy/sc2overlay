@@ -24,7 +24,10 @@ jobs:
       - name: Build
         run: dotnet publish -c Release -o release
         working-directory: src/Overlay.API
+      - name: zip up the build
+        shell: pwsh
+        run: Compress-Archive -Path ./src/Overlay.API/release -DestinationPath sc2overlay.zip
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: src/Overlay.API/release/*
+          files: sc2overlay.zip
