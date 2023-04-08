@@ -22,6 +22,9 @@ public class MMRClient : IMMRClient
         var ocrWidth = Convert.ToInt16(bmp.Width * 0.1421319796954315);
         var ocrHeight = Convert.ToInt16(bmp.Height * 0.0145833333333333);
 
+        // Todo exclude the team text, just grab the digits
+        // Digit only OCR processing? Close enough as it is I think
+        // Even as it is now with "Team" we're pretty okay I think
         var team1 = _ocrClient.GetText(bmp, team1sourceX, sourceY, ocrWidth, ocrHeight, true);
         var team2 = _ocrClient.GetText(bmp, team2sourceX, sourceY, ocrWidth, ocrHeight, true);
 

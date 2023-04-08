@@ -34,7 +34,6 @@ namespace Overlay.Data
         {
             [DllImport("user32.dll")]
             public static extern IntPtr FindWindow(string className, string windowName);
-
             [DllImport("user32.dll")]
             public static extern IntPtr GetWindowDC(IntPtr hWnd);
             [DllImport("user32.dll")]
@@ -53,11 +52,11 @@ namespace Overlay.Data
             int width = windowRect.right - windowRect.left;
             int height = windowRect.bottom - windowRect.top;
 
-            IntPtr hdcDest = Gdi32.CreateCompatibleDC(hdcSrc);
-            IntPtr hBitmap = Gdi32.CreateCompatibleBitmap(hdcSrc, width, height);
+            var hdcDest = Gdi32.CreateCompatibleDC(hdcSrc);
+            var hBitmap = Gdi32.CreateCompatibleBitmap(hdcSrc, width, height);
+            var hOld = Gdi32.SelectObject(hdcDest, hBitmap);
 
-            IntPtr hOld = Gdi32.SelectObject(hdcDest, hBitmap);
-            Gdi32.BitBlt(hdcDest, 0, 0, width, height, hdcSrc, 0, 0, 13369376);
+            Gdi32.BitBlt(hdcDest, 0, 0, width, height, hdcSrc, 0, 0, Convert.ToInt32(CopyPixelOperation.SourceCopy));
             Gdi32.SelectObject(hdcDest, hOld);
             Gdi32.DeleteDC(hdcDest);
             User32.ReleaseDC(handle, hdcSrc);
