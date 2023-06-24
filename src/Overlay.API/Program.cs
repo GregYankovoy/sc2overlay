@@ -33,6 +33,7 @@ builder.Services.AddSingleton<Broker>();
 var app = builder.Build();
 
 // Start our event loop for monitoring the UI
+// We should use builder.Services.AddHostedService with IHostedService (with a cancellation token?), and everything should be part of broker
 var sc2Client = app.Services.GetService<SC2Client>();
 var uiMonitor = sc2Client.MonitorUI();
 

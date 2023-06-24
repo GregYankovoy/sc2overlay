@@ -26,7 +26,7 @@ jobs:
         working-directory: src/Overlay.API
       - name: zip up the build
         shell: pwsh
-        run: Compress-Archive -Path ./src/Overlay.API/release -DestinationPath sc2overlay.zip
+        run: Compress-Archive -Path ./src/Overlay.API/release/* -DestinationPath sc2overlay.zip
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
